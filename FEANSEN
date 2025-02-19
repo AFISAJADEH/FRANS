@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FEANSEN STORE.ID</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0A472E;
+            color: white;
+            text-align: center;
+        }
+        header {
+            padding: 20px;
+        }
+        input {
+            padding: 10px;
+            width: 80%;
+            margin-top: 10px;
+        }
+        button {
+            background-color: #1DB954;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #128C4D;
+        }
+        #orderSection {
+            display: none;
+        }
+        .package {
+            background-color: #128C4D;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>FEANSEN STORE.ID</h1>
+        <input type="text" id="search" placeholder="Cari produk..." onkeyup="searchProduct()">
+    </header>
+
+    <main>
+        <section id="menu">
+            <h2>Pilih Paket</h2>
+
+            <h3>JOKI CDID (Car Driving Indonesia)</h3>
+            <button class="package" onclick="choosePackage('JOKI CDID - 5M = 14K')">5M = 14K</button>
+            <button class="package" onclick="choosePackage('JOKI CDID - 10M = 18K')">10M = 18K</button>
+            <button class="package" onclick="choosePackage('JOKI CDID - 15M = 26K')">15M = 26K</button>
+            <button class="package" onclick="choosePackage('JOKI CDID - 20M = 30K')">20M = 30K</button>
+            <button class="package" onclick="choosePackage('JOKI CDID - 30M = 43K')">30M = 43K</button>
+            <button class="package" onclick="choosePackage('JOKI CDID - 40M = 53K')">40M = 53K</button>
+            <button class="package" onclick="choosePackage('JOKI CDID - 50M = 62K')">50M = 62K</button>
+            <button class="package" onclick="choosePackage('JOKI CDID - 100M = 107K')">100M = 107K</button>
+
+            <h3>ROBUX PRICE (Trade 5 Hari)</h3>
+            <button class="package" onclick="choosePackage('ROBUX PRICE - 100R$ = 14K')">100R$ = 14K</button>
+            <button class="package" onclick="choosePackage('ROBUX PRICE - 200R$ = 26K')">200R$ = 26K</button>
+            <button class="package" onclick="choosePackage('ROBUX PRICE - 300R$ = 37K')">300R$ = 37K</button>
+            <button class="package" onclick="choosePackage('ROBUX PRICE - 400R$ = 48K')">400R$ = 48K</button>
+            <button class="package" onclick="choosePackage('ROBUX PRICE - 500R$ = 59K')">500R$ = 59K</button>
+            <button class="package" onclick="choosePackage('ROBUX PRICE - 600R$ = 70K')">600R$ = 70K</button>
+            <button class="package" onclick="choosePackage('ROBUX PRICE - 700R$ = 81K')">700R$ = 81K</button>
+            <button class="package" onclick="choosePackage('ROBUX PRICE - 800R$ = 92K')">800R$ = 92K</button>
+        </section>
+
+        <section id="orderSection">
+            <h2>Konfirmasi Pesanan</h2>
+            <p id="selectedPackage"></p>
+            <label for="username">Masukkan Username Roblox:</label>
+            <input type="text" id="username" placeholder="Username">
+            <p><strong>INGAT NAMA HARUS BENAR JANGAN SAMPAI SALAH</strong></p>
+            <button onclick="sendOrder()">Oke</button>
+            <button onclick="cancelOrder()">No</button>
+        </section>
+    </main>
+
+    <script>
+        let adminNumbers = ["62895328556204", "6281217452900"];
+        let selectedPackage = "";
+
+        function choosePackage(packageName) {
+            document.getElementById('menu').style.display = 'none';
+            document.getElementById('orderSection').style.display = 'block';
+            selectedPackage = packageName;
+            document.getElementById('selectedPackage').innerText = "Paket yang dipilih: " + packageName;
+        }
+
+        function sendOrder() {
+            let username = document.getElementById('username').value;
+            if (username.trim() === "") {
+                alert("Username tidak boleh kosong!");
+                return;
+            }
+            let message = encodeURIComponent(`Halo admin, saya ingin order ${selectedPackage} dengan username ${username}.`);
+
+            let admin = adminNumbers[Math.floor(Math.random() * adminNumbers.length)];
+            let waLink = `https://wa.me/${admin}?text=${message}`;
+            window.location.href = waLink;
+        }
+
+        function cancelOrder() {
+            document.getElementById('menu').style.display = 'block';
+            document.getElementById('orderSection').style.display = 'none';
+        }
+
+        function searchProduct() {
+            let input = document.getElementById('search').value.toLowerCase();
+            console.log("Fitur pencarian aktif: " + input);
+        }
+    </script>
+</body>
+</html>
